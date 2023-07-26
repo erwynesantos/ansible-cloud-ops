@@ -14,17 +14,17 @@
           aws s3 cp s3://skillup-santose-s3-01/backend.zip /tmp/befiles/backend.zip
 
 - name: Extract backend.zip to /var/www/html/
-  unarchive:  
+  unarchive:
     src: /tmp/befiles/backend.zip
     dest: /var/www/html/
     remote_src: yes
-    notify:
-    - Restart apache2
 
 - name: Remove default index.html to use index.php instead
   file:
     path: /var/www/html/index.html
     state: absent
+  notify:
+   - Restart apache2
 
 - name: Enable apache2 on startup
   service:

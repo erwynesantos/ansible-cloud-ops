@@ -27,12 +27,8 @@
   file:
     path: /var/www/html/index.html
     state: absent
-
-- name: Start apache2
-  service:
-    name: apache2
-    state: started
-    enabled: yes
+  notify:
+    - Restart apache2
 
 - name: Remove the user 'test'
   user:

@@ -1,0 +1,57 @@
+---
+- name: Install apache2, mysql-client and php
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - apache2
+    - mysql-client
+    - php
+
+- name: Create fe directory
+  file:
+    path: /tmp/fefiles
+    state: directory
+
+- name: Download from S3
+  shell: |
+          aws s3 cp s3://skillup-santose-s3-01/fe.zip /tmp/fefiles/fe.zip
+
+- name: Extract fe.zip to /var/www/html/
+  unarchive:  
+    src: /tmp/fefiles/fe.zip
+    dest: /var/www/html/
+    remote_src: yes
+
+- name: Start apache2
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+- name: Remove the user 'test'
+  user:
+    name: test
+    state: absent
+    remove: yes
+
+- name: Create Multiple Users
+  user:
+    name: "{{ item }}"
+    state: present
+    password: "{{ default_user_password | password_hash('sha512','A512') }}"
+    shell: /bin/bash
+  loop:
+    - apple
+    - banana
+    - carrot
+
+- name: Change /etc/shadow permission
+  ansible.builtin.file:
+    path: /etc/shadow
+    mode: '0400'
+
+- name: Change /var/log/syslog permission
+  ansible.builtin.file:
+    path: /var/log/syslog
+    mode: '0600'

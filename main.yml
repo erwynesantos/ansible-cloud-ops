@@ -1,0 +1,29 @@
+---
+- name: Run common to all servers
+  hosts: global
+  become: yes
+
+  roles:
+    - common
+  tags:
+    - common
+
+- name: Run backend role to backend servers
+  hosts: backend
+  become: yes
+
+  roles:
+    - backend
+  tags:
+    - frontend
+    - common
+
+- name: Run frontend role to frontend servers
+  hosts: frontend
+  become: yes
+
+  roles:
+    - frontend
+  tags:
+    - frontend
+    - common

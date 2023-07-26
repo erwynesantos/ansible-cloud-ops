@@ -1,0 +1,40 @@
+---
+- name: Run pre-task.
+  import_tasks:
+    file: pre_task.yml
+
+- name: Make backup of sshd_config
+  copy:
+    src: /etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config_`date +"%Y%m%d_%H%M"`
+
+- name: Change ssh port
+  lineinfile:
+    dest: "/etc/ssh/sshd_config"
+    regexp: "^Port"
+    line: "{{ sshd_port }}"
+  notify: "Restart sshd"
+
+- name: Create logrotate config
+  copy:
+    dest: "/etc/logrotate.d/logrotate-test.conf"
+    content: |
+      /var/log/linuxserver/linux.log {
+      rotate 7
+      daily
+      compress
+      delaycompress
+      missingok
+      notifempty
+      create 660 ubuntu ubuntu }
+
+- name: Install wget, unzip, curl, git, and, jq
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - wget
+    - unzip
+    - curl
+    - git
+    - jq

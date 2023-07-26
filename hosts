@@ -1,12 +1,12 @@
 [global]
-be1 ansible_host=10.0.3.97 ansible_user=ubuntu   ansible_port=2022
-be2 ansible_host=10.0.4.81 ansible_user=ubuntu   ansible_port=2022
+be1 ansible_host=10.0.4.165 ansible_user=ubuntu   ansible_port=2022
+be2 ansible_host=10.0.3.45 ansible_user=ubuntu   ansible_port=2022
 fe1 ansible_host=10.0.3.64 ansible_user=ubuntu   ansible_port=2022
 fe2 ansible_host=10.0.4.154 ansible_user=ubuntu   ansible_port=2022
 
 [backend]
-be1 ansible_host=10.0.3.97 ansible_user=ubuntu   ansible_port=2022
-be2 ansible_host=10.0.4.81 ansible_user=ubuntu   ansible_port=2022
+be1 ansible_host=10.0.4.165 ansible_user=ubuntu   ansible_port=2022
+be2 ansible_host=10.0.3.45 ansible_user=ubuntu   ansible_port=2022
 
 [frontend]
 fe1 ansible_host=10.0.3.64 ansible_user=ubuntu   ansible_port=2022

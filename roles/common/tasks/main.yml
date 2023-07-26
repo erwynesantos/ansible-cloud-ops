@@ -12,7 +12,7 @@
   lineinfile:
     dest: "/etc/ssh/sshd_config"
     regexp: "^Port"
-    line: "{{ sshd_port }}"
+    line: "Port 2022"
   notify: "Restart sshd"
 
 - name: Create logrotate config

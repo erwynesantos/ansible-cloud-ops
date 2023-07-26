@@ -1,15 +1,15 @@
 [global]
-be1 ansible_host=10.0.4.165 ansible_user=ubuntu   ansible_port=2022
-be2 ansible_host=10.0.3.45 ansible_user=ubuntu   ansible_port=2022
-fe1 ansible_host=10.0.3.64 ansible_user=ubuntu   ansible_port=2022
-fe2 ansible_host=10.0.4.46 ansible_user=ubuntu   ansible_port=2022
+be1 ansible_host=10.0.4.33 ansible_user=ubuntu   ansible_port=2022
+be2 ansible_host=10.0.3.86 ansible_user=ubuntu   ansible_port=2022
+fe1 ansible_host=10.0.4.201 ansible_user=ubuntu   ansible_port=2022
+fe2 ansible_host=10.0.3.140 ansible_user=ubuntu   ansible_port=2022
 
 [backend]
-be1 ansible_host=10.0.4.165 ansible_user=ubuntu   ansible_port=2022
-be2 ansible_host=10.0.3.45 ansible_user=ubuntu   ansible_port=2022
+be1 ansible_host=10.0.4.33 ansible_user=ubuntu   ansible_port=2022
+be2 ansible_host=10.0.3.86 ansible_user=ubuntu   ansible_port=2022
 
 [frontend]
-fe1 ansible_host=10.0.3.64 ansible_user=ubuntu   ansible_port=2022
-fe2 ansible_host=10.0.4.46 ansible_user=ubuntu   ansible_port=2022
+fe1 ansible_host=10.0.4.201 ansible_user=ubuntu   ansible_port=2022
+fe2 ansible_host=10.0.3.140 ansible_user=ubuntu   ansible_port=2022
 
 #ansible_ssh_extra_args='-o StrictHostKeyChecking=no'

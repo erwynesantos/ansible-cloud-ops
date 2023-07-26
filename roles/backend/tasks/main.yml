@@ -18,14 +18,15 @@
     src: /tmp/befiles/backend.zip
     dest: /var/www/html/
     remote_src: yes
+    notify:
+    - Restart apache2
 
 - name: Remove default index.html to use index.php instead
   file:
     path: /var/www/html/index.html
     state: absent
 
-- name: Start apache2
+- name: Enable apache2 on startup
   service:
     name: apache2
-    state: started
     enabled: yes

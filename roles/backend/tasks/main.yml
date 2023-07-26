@@ -9,31 +9,20 @@
     path: /tmp/befiles
     state: directory
 
-#- s3: bucket=skillup-erwyne object=/backend.zip dest=/tmp/fefiles/backend.zip mode=get
-
-    #- name: download file from s3
-    # become: yes
-    #aws_s3:
-    # bucket: skillup-santose-s3-01
-    #object: /backend.zip
-    #dest: /tmp/fefiles/backend.zip
-    #mode: get
-
-#- name: Configure AWS
-#  shell: |
-#  aws configure set aws_access_key_id AKIA4O6YRV2IY2FDOWWN
-#  aws configure set aws_secret_access_key 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
-#  aws configure set default.region us-west-1
-
 - name: Download from S3
   shell: |
-          aws s3 cp s3://skillup-santose-s3-01/be.zip /tmp/befiles/be.zip
+          aws s3 cp s3://skillup-santose-s3-01/backend.zip /tmp/befiles/backend.zip
 
-- name: Extract be.zip to /var/www/html/
-  unarchive:
-    src: /tmp/befiles/be.zip
+- name: Extract backend.zip to /var/www/html/
+  unarchive:  
+    src: /tmp/befiles/backend.zip
     dest: /var/www/html/
     remote_src: yes
+
+- name: Remove default index.html to use index.php instead
+  file:
+    path: /var/www/html/index.html
+    state: absent
 
 - name: Start apache2
   service:

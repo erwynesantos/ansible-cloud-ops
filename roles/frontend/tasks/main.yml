@@ -15,13 +15,18 @@
 
 - name: Download from S3
   shell: |
-          aws s3 cp s3://skillup-santose-s3-01/fe.zip /tmp/fefiles/fe.zip
+          aws s3 cp s3://skillup-santose-s3-01/frontend.zip /tmp/fefiles/frontend.zip
 
 - name: Extract fe.zip to /var/www/html/
   unarchive:  
-    src: /tmp/fefiles/fe.zip
+    src: /tmp/fefiles/frontend.zip
     dest: /var/www/html/
     remote_src: yes
+
+- name: Remove default index.html to use index.php instead
+  file:
+    path: /var/www/html/index.html
+    state: absent
 
 - name: Start apache2
   service:
